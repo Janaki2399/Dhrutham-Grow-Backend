@@ -12,7 +12,9 @@ router.route("/").get(async (req, res) => {
     );
     res.status(200).json({ quizList, success: true });
   } catch (err) {
-    res.status(500).json({ success: false, errorMessage: err.message });
+    res
+      .status(500)
+      .json({ success: false, errorMessage: "Something went wrong" });
   }
 });
 
@@ -35,7 +37,9 @@ router.route("/:quizId/rules").get(async (req, res) => {
     const details = await Quiz.findById(quizId).select("rules playtime");
     res.status(200).json({ details, success: true });
   } catch (err) {
-    res.status(500).json({ success: false, errorMessage: err.message });
+    res
+      .status(500)
+      .json({ success: false, errorMessage: "Something went wrong!" });
   }
 });
 
@@ -47,7 +51,9 @@ router.route("/:quizId/play").get(async (req, res) => {
       .populate({ path: "questions" });
     res.status(200).json({ game, success: true });
   } catch (err) {
-    res.status(500).json({ success: false, errorMessage: err.message });
+    res
+      .status(500)
+      .json({ success: false, errorMessage: "Something went wrong!" });
   }
 });
 module.exports = router;

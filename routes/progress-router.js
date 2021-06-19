@@ -28,7 +28,9 @@ router.get("/:progressId", async (req, res) => {
     );
     res.status(200).json({ success: true, progress });
   } catch (error) {
-    res.status(500).json({ success: false, errorMessage: error.message });
+    res
+      .status(500)
+      .json({ success: false, errorMessage: "Something went wrong!" });
   }
 });
 

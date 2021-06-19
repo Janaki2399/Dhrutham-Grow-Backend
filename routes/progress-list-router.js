@@ -25,13 +25,14 @@ router.get("/", async (req, res) => {
     const { userId } = req.user;
     const progressList = await ProgressList.findOne({ userId }).populate({
       path: "list",
-      // Get friends of friends - populate the 'friends' array for every friend
       populate: { path: "quiz", select: "name thumbnail" },
       select: "numberOfAttempts",
     });
     res.status(200).json({ success: true, progressList });
   } catch (error) {
-    res.status(500).json({ success: false, errorMessage: error.message });
+    res
+      .status(500)
+      .json({ success: false, errorMessage: "Something went wrong" });
   }
 });
 
@@ -86,7 +87,9 @@ router.post("/:quizId", async (req, res) => {
     }
     res.json({ sucess: true });
   } catch (error) {
-    res.status(500).json({ success: false, errorMessage: error.message });
+    res
+      .status(500)
+      .json({ success: false, errorMessage: "Something went wrong" });
   }
 });
 module.exports = router;
