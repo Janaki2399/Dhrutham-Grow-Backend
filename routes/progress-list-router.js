@@ -87,6 +87,7 @@ router.post("/:quizId", async (req, res) => {
     }
     res.json({ sucess: true });
   } catch (error) {
+    console.log(error.message);
     res
       .status(500)
       .json({ success: false, errorMessage: "Something went wrong" });
