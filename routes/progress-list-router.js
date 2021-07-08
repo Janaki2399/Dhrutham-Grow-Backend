@@ -44,7 +44,7 @@ router.post("/:quizId", async (req, res) => {
     const progressList = await ProgressList.findOne({ userId });
 
     if (progressList) {
-      let quiz = await Progress.findOne({ quiz: quizId });
+      let quiz = await Progress.findOne({ quiz: quizId, userId });
       if (quiz) {
         const score = new Score(body);
         await score.save();
@@ -74,6 +74,7 @@ router.post("/:quizId", async (req, res) => {
       await score.save();
       const progress = new Progress({
         quiz: { _id: quizId },
+        userId,
         numberOfAttempts: 1,
         highestScore: body.score,
         attemptDetails: [{ _id: score._id }],
